@@ -114,6 +114,7 @@ plot_results = function(folderName){
                         geom_point() +
                         scale_x_continuous(breaks=x_ticks) +
                         scale_y_continuous(breaks=seq(0,100,10)) +  
+                        theme(axis.text.x = element_text(angle = 90)) + 
                         ylab('% of simulations') +
                         xlab('max N per group') +                 
                         ggtitle(title_string)

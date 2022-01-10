@@ -8,7 +8,8 @@ summary_stats = function(saveDF,nFrom,nTo,nBy,folderName){
         # Libraries
         pacman::p_load(data.table,
                        tidyverse,
-                       rio)
+                       rio,
+                       tibble)
         
         # Define the parameters and flags #############################################
         
@@ -171,25 +172,34 @@ summary_stats = function(saveDF,nFrom,nTo,nBy,folderName){
         # If no simulation supported H0, then manually create these columns:
         if (!'n_simulations_supports_H0' %in% names(power_table)){
                 
-                power_table$n_simulations_supports_H0 <- 0
-                power_table$perc_simulations_supports_H0 <- 0
+                power_table <- power_table %>%
+                        add_column(n_simulations_supports_H0 = 0, 
+                                   .after = 'altMaxN') %>%
+                        add_column(perc_simulations_supports_H0 = 0,
+                                   .after = 'n_simulations_supports_undecided')
                 
         }
         
         # If no simulation supported H1, then manually create these columns:
         if (!'n_simulations_supports_H1' %in% names(power_table)){
                 
-                power_table$n_simulations_supports_H1 <- 0
-                power_table$perc_simulations_supports_H1 <- 0
+                power_table <- power_table %>%
+                        add_column(n_simulations_supports_H1 = 0, 
+                                   .after = 'n_simulations_supports_H0') %>%
+                        add_column(perc_simulations_supports_H1 = 0,
+                                   .after = 'perc_simulations_supports_H0')                
                 
         }
         
         # If no simulation supported undecided, then manually create these columns:
         if (!'n_simulations_supports_undecided' %in% names(power_table)){
                 
-                power_table$n_simulations_supports_undecided <- 0
-                power_table$perc_simulations_supports_undecided <- 0
-                
+                power_table <- power_table %>%
+                        add_column(n_simulations_supports_undecided = 0, 
+                                   .after = 'n_simulations_supports_H1') %>%
+                        add_column(perc_simulations_supports_undecided = 0,
+                                   .after = 'perc_simulations_supports_H1')
+        
         }
         
         # Now unite these two tables
