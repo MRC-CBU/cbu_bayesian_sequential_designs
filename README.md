@@ -10,6 +10,8 @@ Finally, please make sure to install the "pacman" package using install.packages
 # Main sequence of steps to run simulations:
 1_simulation_parameters.R: specify various types of simulations you'd like to run. You can either run on the cluster or locally.
 
+To run on the cluster, set the submitJob flag to TRUE and simLocal flag to FALSE in this script. The R script will automatically create a batch job and submit it to the slurm job manager on the cluster. No additional steps are needed, you don't need to write any shell scripts yourself. Once slurm is done, it will dump the results in a new folder in the main working directory. The main file containing results is the results_0.RDS.
+
 The rest of the scripts can be run on your local machine, after you have synced the simulation results from the cluster to your local machine. Running these scripts on the login nodes will generally be slower. 
 
 2_move_slurm_output.R: slurm will dump the results in the main working directory. To avoid cluttering the space, this script will move the specified folder to the ./data folder. Subsequent scripts will look for data there. 
