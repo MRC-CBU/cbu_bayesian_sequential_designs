@@ -1,0 +1,181 @@
+---
+title: "mmm_presentation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries-global-options}
+# Clean the environment
+rm(list=ls())
+
+# Load the packages
+pacman::p_load(pacman,
+               tidyverse,
+               rio,
+               kableExtra)
+
+```
+
+```{r load-data}
+
+folderName <- 'results_1'
+
+
+sims_preprocessed <- import('./analysis_results/results_1/sims_preprocessed.RData')
+
+power_table <- import('./analysis_results/results_1/power_table.RData')
+
+```
+
+```{r what-factors-are-there}
+
+# How many combination of factors do we have?
+unique_combs <- sims_preprocessed %>%
+        select(minN,d,crit1,crit2,batchSize,limit,test_type,side_type) %>%
+        distinct()
+
+unique_combs
+
+```
+
+```{r explain-sims-preprocessed}
+
+head(sims_preprocessed,10)
+
+```
+
+```{r explain-power-table}
+
+# Take just one of the simulations:
+power_table_slice <- power_table %>%
+        filter(minN == unique_combs$minN[1],
+               d == unique_combs$d[1],
+               crit1 == unique_combs$crit1[1],
+               crit2 == unique_combs$crit2[1],
+               batchSize == unique_combs$batchSize[1],
+               limit == unique_combs$limit[1],
+               test_type == unique_combs$test_type[1],
+               side_type == unique_combs$side_type[1]) 
+
+# Sort by altMaxN
+power_table_slice <- power_table_slice %>%
+        arrange(altMaxN)
+
+power_table_slice %>%
+        knitr::kable() %>%
+        kable_styling(bootstrap_options = "striped")
+
+```
+
+```{r plot-paired-vs-unpaired, fig.width=10, fig.height=5}
+
+# Turn it into a long form version. Works better with ggplot
+power_table_long <- 
+        power_table %>%
+        select(-starts_with('n_sim')) %>%
+        pivot_longer(cols = c(perc_simulations_supports_H1,
+                              perc_simulations_supports_H0,
+                              perc_simulations_supports_undecided),
+                     names_to = 'bf_status',
+                     values_to = 'perc_simulations')
+
+
+x_ticks <- seq(power_table$minN[1],power_table$limit[1],power_table$batchSize[1])
+
+# power_table_long %>%
+#         filter(d == 0.5,
+#                side_type == 'two_tailed',
+#                crit1 == 10,
+#                crit2 == 1/6) %>% 
+#         ggplot(aes(x=altMaxN,
+#                    y=perc_simulations,
+#                    group=bf_status,
+#                    color=bf_status)) +
+#         geom_line() +
+#         geom_point() +
+#         scale_x_continuous(breaks=x_ticks) +
+#         scale_y_continuous(breaks=seq(0,100,10)) +  
+#         ylab('% of simulations') +
+#         xlab('max N per group') +    
+#         facet_wrap(~test_type) + 
+#         theme(axis.text.x = element_text(angle = 90)) + 
+#         geom_hline(yintercept = 80,
+#                    linetype = 'dashed')
+        
+power_table_long %>%
+        filter(d == 0.5,
+               side_type == 'two_tailed',
+               crit1 == 10,
+               crit2 == 1/6,
+               bf_status == 'perc_simulations_supports_H1') %>% 
+        ggplot(aes(x=altMaxN,
+                   y=perc_simulations,
+                   group=test_type,
+                   color=test_type)) +
+        geom_line() +
+        geom_point() +
+        scale_x_continuous(breaks=x_ticks) +
+        scale_y_continuous(breaks=seq(0,100,10)) +  
+        ylab('% of simulations supports H1') +
+        xlab('max N per group') +  
+        theme(axis.text.x = element_text(angle = 90)) + 
+        geom_hline(yintercept = 80,
+                   linetype = 'dashed') + 
+        ggtitle(paste('Paired vs Unpaired. d = 0.5',sep=''))
+
+power_table_long %>%
+        filter(d == 0,
+               side_type == 'two_tailed',
+               crit1 == 10,
+               crit2 == 1/6,
+               bf_status == 'perc_simulations_supports_H0') %>% 
+        ggplot(aes(x=altMaxN,
+                   y=perc_simulations,
+                   group=test_type,
+                   color=test_type)) +
+        geom_line() +
+        geom_point() +
+        scale_x_continuous(breaks=x_ticks) +
+        scale_y_continuous(breaks=seq(0,100,10)) +  
+        ylab('% of simulations support H0') +
+        xlab('max N per group') +  
+        theme(axis.text.x = element_text(angle = 90)) + 
+        geom_hline(yintercept = 80,
+                   linetype = 'dashed') + 
+        ggtitle(paste('Paired vs Unpaired. d = 0',sep=''))
+
+
+
+```
+
+```{r plot-different-effect-sizes}
+
+# power_table_long %>%
+#         filter(d %in% c(0.25,0.5),
+#                side_type == 'two_tailed',
+#                crit1 == 10,
+#                crit2 == 1/6,
+#                bf_status == 'perc_simulations_supports_H1',
+#                test_type == 'unpaired') %>% View()
+#         mutate(d = as.factor(d)) %>%
+#         ggplot(aes(x=altMaxN,
+#                    y=perc_simulations,
+#                    group=d,
+#                    color=d)) +
+#         geom_line() +
+#         geom_point() +
+#         scale_x_continuous(breaks=x_ticks) +
+#         scale_y_continuous(breaks=seq(0,100,10)) +  
+#         ylab('% of simulations supports H1') +
+#         xlab('max N per group') +  
+#         theme(axis.text.x = element_text(angle = 90)) + 
+#         geom_hline(yintercept = 80,
+#                    linetype = 'dashed') + 
+#         ggtitle(paste('Paired vs Unpaired. d = 0.5',sep=''))
+
+```
+
+
