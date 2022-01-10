@@ -35,7 +35,7 @@ d         <- c(0.5) # various effect sizes to consider
 crit1     <- c(10) # criteria for stopping for BF10
 crit2     <- c(1/6) # criteria for stopping for BF01
 minN      <- 10 # Initial minimum number of participants per group
-batchSize <- 2 # How many participants to add per group when neither of the criteria are reached.
+batchSize <- 5 # How many participants to add per group when neither of the criteria are reached.
 
 # Note: if various batchSizes are simulated the post-processing scripts
 # might not work.
@@ -45,7 +45,7 @@ test_types <- c('unpaired')
 side_types <- c('two_tailed')
 
 # Name for saving folder
-saveFolder <- 'results_mmm_small_batchsize'
+saveFolder <- 'results_mmm_1'
 
 # Submit the slurm job?
 submitJob <- FALSE
@@ -131,7 +131,7 @@ helperfunction <- function(minN, d, crit1, crit2, batchSize, limit,
                                 nullInterval = null_interval
                                 )[1],4)
                 }
-                print(i)
+                
                 i <- i + 1
         }
 
@@ -171,7 +171,7 @@ params <- cart_prod %>%
         slice(rep(1:n(), each=nIter)) %>%
         mutate(across(c('test_type','side_type'),as.character))
 
-# Run the simlation ##########################################################
+# Run the simulation ##########################################################
 
 
 ## Try locally for every row -----------------------------------------------
