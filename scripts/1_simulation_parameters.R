@@ -25,13 +25,13 @@ pacman::p_load(rslurm,
 # Slurm job parameters
 n_nodes       <- 1
 cpus_per_node <- 16
-nIter         <- 100
+nIter         <- 50
 
 # Sequential design parameters. 
 # For d, crit1, and crit2 you can enter a vector of numbers.
 
 nLimit    <- 100 # maximum number of participants to run
-d         <- c(0.5) # various effect sizes to consider
+d         <- c(0,0.5) # various effect sizes to consider
 crit1     <- c(10) # criteria for stopping for BF10
 crit2     <- c(1/6) # criteria for stopping for BF01
 minN      <- 10 # Initial minimum number of participants per group
@@ -41,11 +41,11 @@ batchSize <- 5 # How many participants to add per group when neither of the crit
 # might not work.
 
 # What type of test is it?
-test_types <- c('unpaired')
+test_types <- c('unpaired','paired')
 side_types <- c('two_tailed')
 
 # Name for saving folder
-saveFolder <- 'results_mmm_1'
+saveFolder <- 'results_mmm_2'
 
 # Submit the slurm job?
 submitJob <- FALSE

@@ -13,11 +13,11 @@ saveData <- TRUE
 
 # For the summary stats
 nFrom <- 10
-nTo   <- 100
+nTo   <- 50
 nBy   <- 5
 
 # Folder where the slurm output is
-folder <- 'results_mmm_1'
+folder <- 'results_mmm_2'
 
 # Now, call each function ######################################################
 
