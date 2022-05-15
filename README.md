@@ -35,7 +35,7 @@ scripts:
 Folder for all the scripts. Has a ./utils subfolder that contains some helper functions for various purposes.
 
 analysis_output:
-For preprocessing and other stats results from various analysis. Contains an example analyzed output in the "results_1" folder, where we simulated all the combination of the following factors: minN=24, batchSize=12, maxN=600, BF10 criteria of 6 or 10, BF01 criteria of 6 or 10, one-tailed and two-tailed, paired and unpaired t-test.
+For preprocessing and other stats results from various analysis. Contains an example analyzed output in the "results_1" folder, where we simulated all the combination of the following factors: d=0 or d=0.5, minN=24, batchSize=12, maxN=600, BF10 criteria of 6 or 10, BF01 criteria of 6 or 10, one-tailed and two-tailed, paired and unpaired t-test.
 
 
 # Authors:
