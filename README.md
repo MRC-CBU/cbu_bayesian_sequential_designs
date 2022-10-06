@@ -4,9 +4,6 @@ This repository contains code for simulating "power" for sequential Bayesian des
 
 For theoretical and practical guide, please see the following webinar (internal to the CBU):
 - [10/01/2022, Bayesian Sequential Designs (Rik Henson & Levan Bokeria)](https://portal.mrc-cbu.cam.ac.uk/sslvpn/PT/http://intranet.mrc-cbu.cam.ac.uk/home/mmm-talks/)
-=======
-For theoretical and practical guide to using this codebase, please see the following webinar (internal to the CBU):
-- [10/01/2022, Bayesian Sequential Designs (Rik Henson & Levan Bokeria)](http://intranet.mrc-cbu.cam.ac.uk/home/mmm-talks/)
 
 For a quick video introduction to Bayesian sequential designs see: [Alexander Quent: "Plan to produce strong evidence: Bayesian Sequential Designs"](https://www.youtube.com/watch?v=FGaxLQ_o8D4)
 
