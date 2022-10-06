@@ -174,7 +174,7 @@ params <- cart_prod %>%
 # Run the simulation ##########################################################
 
 
-## Try locally for every row -----------------------------------------------
+## Try locally -------------------------------------------------------------
 if (simLocal){
         print('Simulating locally...')
         

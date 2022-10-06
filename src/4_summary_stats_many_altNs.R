@@ -1,3 +1,5 @@
+# Description
+
 # This script will load the preprocessed dataframe from 3_preprocess_output.R
 # It will then calculate the statistics on supporting H1/H0/undecided for many 
 # alternative maxN stopping rules. 

@@ -1,3 +1,9 @@
+# Description #################################################################
+
+# This is a wrapper code for running steps 2-5 in one go. Make sure to change 
+# the nFrom, nTo, nBy, and "folder" variables to approapriate values corresponding
+# to which simulation you want to preprocess and plot.
+
 
 # Clean the environment and source the subfunctions ###########################
 rm(list=ls())
