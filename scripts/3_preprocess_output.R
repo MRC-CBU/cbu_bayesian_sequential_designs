@@ -1,10 +1,11 @@
 # This script will:
 
 # Preprocess the output of slurm and create a nice dataframe with each row 
-# being a step taken during the simulations, i.e. another batchSize and the result.
+# being a step taken during the simulations, i.e. another batchSize and the 
+# resulting bayes factor.
 
-# The created dataframe can then be used to do whatever summary statistics you
-# want to do on it.
+# The created dataframe can then be used to apply the desired analysis to get 
+# certain summary statistics.
 
 preprocess_output = function(saveDF,folder){
         # Libraries #####################################################
