@@ -17,7 +17,7 @@ For background literature on Bayesian inference and sequential designs in neuros
 ## data:
 A folder where the automatic output of simulations should be moved to. The output data from local simulations or slurm gets dumped in the project folder. Use the _2_move_slurm_output.R_ script to automatically move them to ./data
 
-## scripts:
+## src:
 Folder for all the scripts. Has a ./utils subfolder that contains some helper functions for various purposes.
 
 ## analysis_output:
