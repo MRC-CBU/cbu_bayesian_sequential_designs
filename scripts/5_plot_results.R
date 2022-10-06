@@ -15,7 +15,7 @@ plot_results = function(folderName){
         
         # This must correspond to the variable given to the previous scripts
         if (missing(folderName)){
-                folderName <- 'results_schema_boards'                
+                folderName <- 'results_1'                
         }       
         
         power_table <- import(file.path('./analysis_results',
@@ -55,7 +55,6 @@ plot_results = function(folderName){
         #                side_type == 'two_tailed') %>%
         #         droplevels()
         # n_combs <- nrow(unique_combs)
-
         
         # Create the plot #############################################################
         
