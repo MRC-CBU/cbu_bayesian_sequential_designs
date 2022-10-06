@@ -1,6 +1,8 @@
 # About: 
 
-For theoretical and practical guide to using this codebase, please see the following webinar (internal to the CBU):
+This repository contains code for simulating "power" for sequential Bayesian designs with max-N. 
+
+For theoretical and practical guide, please see the following webinar (internal to the CBU):
 - [10/01/2022, Bayesian Sequential Designs (Rik Henson & Levan Bokeria)](https://portal.mrc-cbu.cam.ac.uk/sslvpn/PT/http://intranet.mrc-cbu.cam.ac.uk/home/mmm-talks/)
 
 # Folder structure: 
