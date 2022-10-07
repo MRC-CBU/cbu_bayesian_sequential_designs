@@ -25,13 +25,13 @@ pacman::p_load(rslurm,
 # Slurm job parameters
 n_nodes       <- 1
 cpus_per_node <- 16
-nIter         <- 200
+nIter         <- 100
 
 # Sequential design parameters. 
 # For d, crit1, and crit2 you can enter a vector of numbers.
 
 nLimit    <- 100 # maximum number of participants to run
-d         <- c(0.5) # various effect sizes to consider
+d         <- c(0.3) # various effect sizes to consider
 crit1     <- c(6) # criteria for stopping for BF10
 crit2     <- c(1/6) # criteria for stopping for BF01
 minN      <- 20 # Initial minimum number of participants per group
